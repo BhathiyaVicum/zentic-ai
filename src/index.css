@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Akt:wght@100..900&family=Inter:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black text-primary-text ;
+  }
+  
+  @layer base {
+  body {
+    font-family: 'Akt', sans-serif;
+  }
+  
+  .font-akt {
+    font-family: 'Akt', sans-serif;
+  }
+}
+
+  /* Custom scrollbar with your brand color */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-brand-dark;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-brand-light rounded-full;
+  }
+}
+
+@layer components {
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(307.73deg, #013E2C, #01B985, #013E2C);
+    padding: 1px;
+    border-radius: 1rem;
+  }
+  
+  .gradient-border > * {
+    background: #00261B;
+    border-radius: 1rem;
+  }
+}
