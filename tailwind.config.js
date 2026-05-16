@@ -18,6 +18,7 @@ export default {
         'brand-light': '#01B985',
         'brand-muted': '#013E2C',
         'brand-hover': '#E3FFF7',
+        'brand-dark-div': '#001C14',
       },
       backgroundImage: {
         // Button Gradient (127.73 degrees)
@@ -37,7 +38,9 @@ export default {
 
         // Top Glow Gradient
         'top-bg-gradient': 'radial-gradient(circle at top, #013E2C 0%, transparent 70%)',
-        
+
+        'subtopic-heading': 'linear-gradient(307.73deg, #00261b00 0%, #00261bff 51%, #00261b00 98%)',
+
       },
       fontFamily: {
         'display': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
