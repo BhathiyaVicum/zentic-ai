@@ -2,6 +2,7 @@ import Navbar from "../components/home/Navbar";
 import Hero from "../components/home/Hero";
 import Features from "../components/home/Features";
 import HowItWorks from "../components/home/HowItWorks";
+import Pricing from "../components/home/Pricing"
 
 const HomePage = () => {
 
@@ -26,9 +27,7 @@ const HomePage = () => {
                 </section>
 
                 <section id="pricing">
-                    <div className="h-screen flex items-center justify-center text-white">
-                        Pricing Section Coming Soon
-                    </div>
+                    <Pricing />
                 </section>
 
                 <section id="faq">
