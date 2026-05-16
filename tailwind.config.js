@@ -7,11 +7,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Your exact colors from Figma
+
+        // Text colors
         'primary-text': '#FFFFFF',
         'secondary-text': '#00D497',
 
-        // Your brand colors
+        // brand colors
         'brand-dark': '#00261B',
         'brand-medium': '#00684A',
         'brand-light': '#01B985',
@@ -33,6 +34,10 @@ export default {
 
         // Hero Background (your dark theme)
         'hero-bg': 'radial-gradient(circle at 10% 20%, #00261B, #000000)',
+
+        // Top Glow Gradient
+        'top-bg-gradient': 'radial-gradient(circle at top, #013E2C 0%, transparent 70%)',
+        
       },
       fontFamily: {
         'display': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
