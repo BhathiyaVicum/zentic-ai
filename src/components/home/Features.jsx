@@ -47,7 +47,7 @@ const Features = () => {
                     {features.map((feature) => (
                         <div 
                             key={feature.id}
-                            className=" flex flex-col items-center text-center group bg-gradient-to-b from-brand-muted/50 to-brand-dark/30 border border-brand-light/10 rounded-2xl px-10 py-8 hover:border-brand-light/30 transition-all duration-300 hover:-translate-y-1"
+                            className=" flex flex-col items-center text-center group bg-gradient-to-b from-brand-muted/50 to-brand-dark/30 border border-brand-light/10 rounded-2xl px-10 py-16 hover:border-brand-light/30 transition-all duration-300 hover:-translate-y-1"
                         >
                             {/* Icon */}
                             <div className="w-28 h-28 mb-6">

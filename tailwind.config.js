@@ -41,6 +41,8 @@ export default {
 
         'subtopic-heading': 'linear-gradient(307.73deg, #00261b00 0%, #00261bff 51%, #00261b00 98%)',
 
+        'step-btn': 'linear-gradient(307.73deg, rgba(0, 38, 27, 0) 0%, rgba(0, 38, 27, 1) 51%, rgba(0, 38, 27, 0) 98%)',
+
       },
       fontFamily: {
         'display': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
