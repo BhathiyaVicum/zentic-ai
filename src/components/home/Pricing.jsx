@@ -2,11 +2,9 @@ const Pricing = () => {
 
     return (
         <section id="pricing" className="relative py-24 px-6">
-            {/* Changed: max-w-7xl mx-auto (same as Features) */}
             <div className="max-w-7xl mx-auto w-full">
 
                 {/* Section Header */}
-                {/* Changed: max-w-3xl (same as Features) */}
                 <div className="text-center max-w-3xl mx-auto">
                     <button className="px-5 py-1 text-secondary-text text-sm font-light border pointer-events-none border-secondary-text/20 rounded-full bg-brand-muted/30">
                         Pricing

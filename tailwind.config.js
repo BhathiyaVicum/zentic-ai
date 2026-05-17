@@ -43,6 +43,10 @@ export default {
 
         'step-btn': 'linear-gradient(307.73deg, rgba(0, 38, 27, 0) 0%, rgba(0, 38, 27, 1) 51%, rgba(0, 38, 27, 0) 98%)',
 
+        'footer-bg': 'linear-gradient(180deg, #013e2cff 0%, #001c14ff 100%)',
+
+        'footer-line': 'linear-gradient(307.73deg, #01261bff 0%, #01b985ff 20%, #01b985ff 78%, #01261bff 100%)',
+
       },
       fontFamily: {
         'display': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
