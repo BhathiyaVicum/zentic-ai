@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import heroImg from "../../assets/hero-img.png";
-import heroImgSm from "../../assets/hero-img-sm.png"
+import heroImgSm from "../../assets/hero-img-sm.png";
+import { FaChevronDown } from "react-icons/fa";
 
 const Hero = () => {
 
@@ -29,10 +30,19 @@ const Hero = () => {
         setRotateY(0);
         setIsHovering(false);
     };
-    
+
+    const scrollToNextSection = () => {
+        const nextSection = document.getElementById("features"); 
+        if (nextSection) {
+            nextSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }
+    };
 
     return (
-        <section id="home" className="relative min-h-screen flex items-center px-6 pt-32">
+        <section id="home" className="relative min-h-screen flex items-center px-6 md:pt-32">
             <div className="max-w-7xl mx-auto w-full">
 
                 <div className="text-center max-w-3xl mx-auto">
@@ -71,7 +81,6 @@ const Hero = () => {
                             transition: 'transform 0.1s ease-out'
                         }}
                     >
-                        {/* Glow effect on hover */}
                         {isHovering && (
                             <div className="absolute -inset-4opacity-50 animate-pulse"></div>
                         )}
@@ -84,11 +93,23 @@ const Hero = () => {
                                 transition: 'transform 0.3s ease'
                             }}
                         />
-                        <img src={heroImgSm} className="w-72 h-72 mx-auto md:hidden" alt="" />
+                        <img src={heroImgSm} className="w-64 mx-auto md:hidden" alt="" />
+
                     </div>
                 </div>
 
             </div>
+
+            <div className="absolute bottom-8 left-0 right-0 flex justify-center md:hidden">
+                <button
+                    onClick={scrollToNextSection}
+                    className="animate-bounce bg-brand-medium/20 hover:bg-brand-medium/30 backdrop-blur-sm p-3 rounded-full transition-all duration-300 hover:scale-110"
+                    aria-label="Scroll down"
+                >
+                    <FaChevronDown className="text-secondary-text text-xl" />
+                </button>
+            </div>
+
         </section>
     );
 }
