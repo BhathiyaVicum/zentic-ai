@@ -29,7 +29,7 @@ const Footer = () => {
                                 Zentic<span className="text-secondary-text">AI</span>
                             </h1>
                         </a>
-                        <p className="text-sm  text-center md:text-left">
+                        <p className="text-md text-center md:text-left">
                             Upload any PDF and turn static pages into a living conversation.
                             Instant summaries, deep insights, and page-perfect citations.
                         </p>
@@ -42,22 +42,22 @@ const Footer = () => {
                             <h3 className="text-secondary-text font-semibold mb-4">Product</h3>
                             <ul className="space-y-2">
                                 <li>
-                                    <a href="#features" onClick={(e) => smoothScroll(e, "features")} className=" hover:text-secondary-text transition text-sm">
+                                    <a href="#features" onClick={(e) => smoothScroll(e, "features")} className=" hover:text-secondary-text transition text-md">
                                         Features
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#pricing" onClick={(e) => smoothScroll(e, "pricing")} className=" hover:text-secondary-text transition text-sm">
+                                    <a href="#pricing" onClick={(e) => smoothScroll(e, "pricing")} className=" hover:text-secondary-text transition text-md">
                                         Pricing
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#faq" onClick={(e) => smoothScroll(e, "faq")} className=" hover:text-secondary-text transition text-sm">
+                                    <a href="#faq" onClick={(e) => smoothScroll(e, "faq")} className=" hover:text-secondary-text transition text-md">
                                         FAQ
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className=" hover:text-secondary-text transition text-sm">
+                                    <a href="#" className=" hover:text-secondary-text transition text-md">
                                         Changelog
                                     </a>
                                 </li>
@@ -69,22 +69,22 @@ const Footer = () => {
                             <h3 className="text-secondary-text font-semibold mb-4">Resources</h3>
                             <ul className="space-y-2">
                                 <li>
-                                    <a href="#" className=" hover:text-secondary-text transition text-sm">
+                                    <a href="#" className=" hover:text-secondary-text transition text-md">
                                         Documentation
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className=" hover:text-secondary-text transition text-sm">
+                                    <a href="#" className=" hover:text-secondary-text transition text-md">
                                         API Reference
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className=" hover:text-secondary-text transition text-sm">
+                                    <a href="#" className=" hover:text-secondary-text transition text-md">
                                         Support
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className=" hover:text-secondary-text transition text-sm">
+                                    <a href="#" className=" hover:text-secondary-text transition text-md">
                                         Status
                                     </a>
                                 </li>
@@ -96,22 +96,22 @@ const Footer = () => {
                             <h3 className="text-secondary-text font-semibold mb-4">Company</h3>
                             <ul className="space-y-2">
                                 <li>
-                                    <a href="#" className=" hover:text-secondary-text transition text-sm">
+                                    <a href="#" className=" hover:text-secondary-text transition text-md">
                                         About Us
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className=" hover:text-secondary-text transition text-sm">
+                                    <a href="#" className=" hover:text-secondary-text transition text-md">
                                         Blog
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className=" hover:text-secondary-text transition text-sm">
+                                    <a href="#" className=" hover:text-secondary-text transition text-md">
                                         Careers
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className=" hover:text-secondary-text transition text-sm">
+                                    <a href="#" className=" hover:text-secondary-text transition text-md">
                                         Contact
                                     </a>
                                 </li>
