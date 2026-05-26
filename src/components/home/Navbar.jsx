@@ -56,8 +56,8 @@ const Navbar = () => {
                         href="#home"
                         onClick={(e) => smoothScroll(e, "home")}
                         className={`transition duration-300 text-lg cursor-pointer ${activeSection === "home"
-                                ? "text-primary-text"
-                                : "text-secondary-text hover:text-primary-text"
+                            ? "text-primary-text"
+                            : "text-secondary-text hover:text-primary-text"
                             }`}
                     >
                         Home
@@ -66,8 +66,8 @@ const Navbar = () => {
                         href="#features"
                         onClick={(e) => smoothScroll(e, "features")}
                         className={`transition duration-300 text-lg cursor-pointer ${activeSection === "features"
-                                ? "text-primary-text "
-                                : "text-secondary-text hover:text-primary-text"
+                            ? "text-primary-text "
+                            : "text-secondary-text hover:text-primary-text"
                             }`}
                     >
                         Features
@@ -76,8 +76,8 @@ const Navbar = () => {
                         href="#pricing"
                         onClick={(e) => smoothScroll(e, "pricing")}
                         className={`transition duration-300 text-lg cursor-pointer ${activeSection === "pricing"
-                                ? "text-primary-text"
-                                : "text-secondary-text hover:text-primary-text"
+                            ? "text-primary-text"
+                            : "text-secondary-text hover:text-primary-text"
                             }`}
                     >
                         Pricing
@@ -86,8 +86,8 @@ const Navbar = () => {
                         href="#faq"
                         onClick={(e) => smoothScroll(e, "faq")}
                         className={`transition duration-300 text-lg cursor-pointer ${activeSection === "faq"
-                                ? "text-primary-text"
-                                : "text-secondary-text hover:text-primary-text"
+                            ? "text-primary-text"
+                            : "text-secondary-text hover:text-primary-text"
                             }`}
                     >
                         FAQ
@@ -101,9 +101,11 @@ const Navbar = () => {
                             Login
                         </button>
                     </Link>
-                    <button className="px-5 py-2 text-lg font-normal bg-btn-primary rounded-xl text-white hover:opacity-80 transition">
-                        Sign up
-                    </button>
+                    <Link to="/signup">
+                        <button className="px-5 py-2 text-lg font-normal bg-btn-primary rounded-xl text-white hover:opacity-80 transition">
+                            Sign up
+                        </button>
+                    </Link>
 
                     {/* Mobile Menu Button */}
                     <button
@@ -131,8 +133,8 @@ const Navbar = () => {
                             href="#home"
                             onClick={(e) => smoothScroll(e, "home")}
                             className={`transition text-lg py-2 ${activeSection === "home"
-                                    ? "text-primary-text font-semibold border-l-4 border-secondary-text pl-3"
-                                    : "text-secondary-text hover:text-primary-text pl-4"
+                                ? "text-primary-text font-semibold border-l-4 border-secondary-text pl-3"
+                                : "text-secondary-text hover:text-primary-text pl-4"
                                 }`}
                         >
                             Home
@@ -141,8 +143,8 @@ const Navbar = () => {
                             href="#features"
                             onClick={(e) => smoothScroll(e, "features")}
                             className={`transition text-lg py-2 ${activeSection === "features"
-                                    ? "text-primary-text font-semibold border-l-4 border-secondary-text pl-3"
-                                    : "text-secondary-text hover:text-primary-text pl-4"
+                                ? "text-primary-text font-semibold border-l-4 border-secondary-text pl-3"
+                                : "text-secondary-text hover:text-primary-text pl-4"
                                 }`}
                         >
                             Features
@@ -151,8 +153,8 @@ const Navbar = () => {
                             href="#pricing"
                             onClick={(e) => smoothScroll(e, "pricing")}
                             className={`transition text-lg py-2 ${activeSection === "pricing"
-                                    ? "text-primary-text font-semibold border-l-4 border-secondary-text pl-3"
-                                    : "text-secondary-text hover:text-primary-text pl-4"
+                                ? "text-primary-text font-semibold border-l-4 border-secondary-text pl-3"
+                                : "text-secondary-text hover:text-primary-text pl-4"
                                 }`}
                         >
                             Pricing
@@ -161,8 +163,8 @@ const Navbar = () => {
                             href="#faq"
                             onClick={(e) => smoothScroll(e, "faq")}
                             className={`transition text-lg py-2 ${activeSection === "faq"
-                                    ? "text-primary-text font-semibold border-l-4 border-secondary-text pl-3"
-                                    : "text-secondary-text hover:text-primary-text pl-4"
+                                ? "text-primary-text font-semibold border-l-4 border-secondary-text pl-3"
+                                : "text-secondary-text hover:text-primary-text pl-4"
                                 }`}
                         >
                             FAQ

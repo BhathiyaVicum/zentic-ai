@@ -1,5 +1,6 @@
 import { FaGoogle, FaGithub, FaEyeSlash, FaEye } from "react-icons/fa";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Signin = () => {
 
@@ -10,7 +11,7 @@ const Signin = () => {
       <div className="max-w-md w-full bg-gradient-to-b from-brand-muted/30 to-brand-dark/20 border border-brand-light/10 rounded-2xl p-8 md:p-10">
 
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-3xl font-semibold text-primary-text mb-1">
+          <h1 className="text-3xl font-semibold text-primary-text mb-1">
             Welcome Back!
           </h1>
           <p className="text-gray-400">
@@ -68,35 +69,26 @@ const Signin = () => {
 
           <p className="text-center text-gray-400 mt-6">
             Don't have an account?{" "}
-            <a href="#" className="text-secondary-text hover:underline">
-              Create account
-            </a>
+            <Link to="/signup">
+              <a href="#" className="text-secondary-text hover:underline">
+                Create account
+              </a>
+            </Link>
           </p>
 
         </form>
 
-        <div className="relative mt-8 mb-4">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-brand-light/20"></div>
-          </div>
-
-          <div className="relative flex justify-center text-sm">
-            <span className="px-4 bg-black text-gray-500">
-              Or continue with
-            </span>
-          </div>
+        <div className="flex items-center gap-4 my-7">
+          <div className="flex-1 border-t border-brand-light/20"></div>
+          <span className="text-gray-500 text-sm">Or continue with</span>
+          <div className="flex-1 border-t border-brand-light/20"></div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1">
 
           <button className="flex items-center justify-center gap-2 px-4 py-2 border border-brand-light/20 rounded-xl text-primary-text hover:bg-brand-muted/30 transition">
             <FaGoogle />
             Google
-          </button>
-
-          <button className="flex items-center justify-center gap-2 px-4 py-2 border border-brand-light/20 rounded-xl text-primary-text hover:bg-brand-muted/30 transition">
-            <FaGithub />
-            GitHub
           </button>
 
         </div>
