@@ -1,4 +1,4 @@
-import { FaGoogle, FaEyeSlash, FaEye } from "react-icons/fa";
+import { FaGoogle, FaEyeSlash, FaEye, FaArrowLeft } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -11,7 +11,17 @@ const Signup = () => {
     <div className="min-h-screen bg-black flex items-center justify-center px-6">
       <div className="max-w-md w-full bg-gradient-to-b from-brand-muted/30 to-brand-dark/20 border border-brand-light/10 rounded-2xl p-8 md:p-10">
 
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 relative ">
+
+          <Link to="/">
+            <button
+              className="absolute top-2 left-2 text-gray-400 hover:text-white transition p-2 hover:bg-white/10 rounded-lg"
+              aria-label="Go back"
+            >
+              <FaArrowLeft size={18} />
+            </button>
+          </Link>
+
           <h1 className="text-3xl font-semibold text-primary-text mb-1">
             Create Account
           </h1>
@@ -70,6 +80,7 @@ const Signup = () => {
             </div>
           </div>
 
+          {/* Sign Up Button */}
           <button className="w-full bg-btn-primary py-3 rounded-xl text-primary-text font-semibold hover:opacity-80 transition">
             Sign Up
           </button>
