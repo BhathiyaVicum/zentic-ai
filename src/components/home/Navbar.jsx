@@ -43,15 +43,16 @@ const Navbar = () => {
         <nav className="fixed w-full z-50 backdrop-blur-lg bg-black/50">
             <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-6">
 
-                {/* Logo */}
-                <a href="#home" onClick={(e) => smoothScroll(e, "home")} className="flex items-center gap-1">
-                    <h1 className="text-2xl font-bold text-primary-text">
-                        Zentic<span className="text-secondary-text">AI</span>
-                    </h1>
-                </a>
+                <div className="flex-shrink-0">
+                    <a href="#home" onClick={(e) => smoothScroll(e, "home")} className="flex items-center gap-1">
+                        <h1 className="text-2xl font-bold text-primary-text">
+                            Zentic<span className="text-secondary-text">AI</span>
+                        </h1>
+                    </a>
+                </div>
 
-                {/* Desktop Navigation */}
-                <div className="hidden md:flex items-center gap-8">
+                {/* Desktop Navigation - Centered absolutely */}
+                <div className="hidden md:flex items-center gap-8 absolute left-1/2 transform -translate-x-1/2">
                     <a
                         href="#home"
                         onClick={(e) => smoothScroll(e, "home")}
@@ -66,7 +67,7 @@ const Navbar = () => {
                         href="#features"
                         onClick={(e) => smoothScroll(e, "features")}
                         className={`transition duration-300 text-lg cursor-pointer ${activeSection === "features"
-                                ? "text-primary-text "
+                                ? "text-primary-text"
                                 : "text-secondary-text hover:text-primary-text"
                             }`}
                     >
@@ -101,9 +102,11 @@ const Navbar = () => {
                             Login
                         </button>
                     </Link>
-                    <button className="px-5 py-2 text-lg font-normal bg-btn-primary rounded-xl text-white hover:opacity-80 transition">
-                        Sign up
-                    </button>
+                    <Link to="/signup" >
+                        <button className="px-5 py-2 text-lg font-normal bg-btn-primary rounded-xl text-white hover:opacity-80 transition">
+                            Sign up
+                        </button>
+                    </Link>
 
                     {/* Mobile Menu Button */}
                     <button
@@ -131,8 +134,8 @@ const Navbar = () => {
                             href="#home"
                             onClick={(e) => smoothScroll(e, "home")}
                             className={`transition text-lg py-2 ${activeSection === "home"
-                                    ? "text-primary-text font-semibold border-l-4 border-secondary-text pl-3"
-                                    : "text-secondary-text hover:text-primary-text pl-4"
+                                ? "text-primary-text font-semibold border-l-4 border-secondary-text pl-3"
+                                : "text-secondary-text hover:text-primary-text pl-4"
                                 }`}
                         >
                             Home
@@ -141,8 +144,8 @@ const Navbar = () => {
                             href="#features"
                             onClick={(e) => smoothScroll(e, "features")}
                             className={`transition text-lg py-2 ${activeSection === "features"
-                                    ? "text-primary-text font-semibold border-l-4 border-secondary-text pl-3"
-                                    : "text-secondary-text hover:text-primary-text pl-4"
+                                ? "text-primary-text font-semibold border-l-4 border-secondary-text pl-3"
+                                : "text-secondary-text hover:text-primary-text pl-4"
                                 }`}
                         >
                             Features
@@ -151,8 +154,8 @@ const Navbar = () => {
                             href="#pricing"
                             onClick={(e) => smoothScroll(e, "pricing")}
                             className={`transition text-lg py-2 ${activeSection === "pricing"
-                                    ? "text-primary-text font-semibold border-l-4 border-secondary-text pl-3"
-                                    : "text-secondary-text hover:text-primary-text pl-4"
+                                ? "text-primary-text font-semibold border-l-4 border-secondary-text pl-3"
+                                : "text-secondary-text hover:text-primary-text pl-4"
                                 }`}
                         >
                             Pricing
@@ -161,8 +164,8 @@ const Navbar = () => {
                             href="#faq"
                             onClick={(e) => smoothScroll(e, "faq")}
                             className={`transition text-lg py-2 ${activeSection === "faq"
-                                    ? "text-primary-text font-semibold border-l-4 border-secondary-text pl-3"
-                                    : "text-secondary-text hover:text-primary-text pl-4"
+                                ? "text-primary-text font-semibold border-l-4 border-secondary-text pl-3"
+                                : "text-secondary-text hover:text-primary-text pl-4"
                                 }`}
                         >
                             FAQ

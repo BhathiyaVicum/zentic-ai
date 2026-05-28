@@ -15,14 +15,14 @@ const Signup = () => {
 
           <Link to="/">
             <button
-              className="absolute top-2 left-2 text-gray-400 hover:text-white transition p-2 hover:bg-white/10 rounded-lg"
+              className="absolute top-2 left-2 text-gray-400 hover:text-white transition md:p-2 hover:bg-white/10 rounded-lg"
               aria-label="Go back"
             >
               <FaArrowLeft size={18} />
             </button>
           </Link>
 
-          <h1 className="text-3xl font-semibold text-primary-text mb-1">
+          <h1 className="text-2xl md:text-3xl font-semibold text-primary-text mb-0">
             Create Account
           </h1>
           <p className="text-gray-400">

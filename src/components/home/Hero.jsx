@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import heroImg from "../../assets/hero-img.png";
 import heroImgSm from "../../assets/hero-img-sm.png";
 import { FaChevronDown } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
 
@@ -64,9 +65,11 @@ const Hero = () => {
                         and explore insights with accurate citations.
                     </p>
 
+                    <Link to={"/signup"}>
                     <button className="mt-6 px-5 py-2 text-lg font-normal bg-btn-primary rounded-xl text-primary-text hover:opacity-80 transition duration-700 shadow-lg hover:scale-105 transform">
                         Get Started For Free ➤
                     </button>
+                    </Link>
                 </div>
 
                 <div className="md:mt-2 mt-12 flex justify-center">
