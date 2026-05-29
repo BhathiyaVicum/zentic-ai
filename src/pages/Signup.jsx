@@ -1,11 +1,101 @@
 import { FaGoogle, FaEyeSlash, FaEye, FaArrowLeft } from "react-icons/fa";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "../lib/supabase";
 
 const Signup = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    try {
+      // Sign up with Supabase
+      const { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            full_name: fullName,
+          },
+          emailRedirectTo: `${window.location.origin}/signin`,
+        },
+      });
+
+      if (error) {
+        setError(error.message);
+        setLoading(false);
+        return;
+      }
+
+      // Check if user needs email confirmation
+      if (data.user?.identities?.length === 0) {
+        setError("User already registered. Please sign in instead.");
+        setLoading(false);
+        return;
+      }
+
+      // Success
+      setSuccess(true);
+      setLoading(false);
+
+      setTimeout(() => {
+        navigate("/signin");
+      }, 10000);
+
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again.");
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignup = async () => {
+    setError(null);
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/dashboard`,
+      },
+    });
+
+    if (error) {
+      setError(error.message);
+    }
+  };
+
+  if (success) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center px-6">
+        <div className="max-w-md w-full bg-gradient-to-b from-brand-muted/30 to-brand-dark/20 border border-brand-light/10 rounded-2xl p-8 md:p-10 text-center">
+          <div className="text-green-500 text-5xl mb-4">✓</div>
+          <h2 className="text-2xl font-semibold text-primary-text mb-2">
+            Registration Successful!
+          </h2>
+          <p className="text-gray-400 mb-6">
+            Please check your email to confirm your account.
+            <br />
+            Redirecting to sign in...
+          </p>
+          <Link to="/signin">
+            <button className="text-secondary-text hover:underline">
+              Go to Sign In
+            </button>
+          </Link>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center px-6">
@@ -30,7 +120,13 @@ const Signup = () => {
           </p>
         </div>
 
-        <form className="space-y-6">
+        {error && (
+          <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSignup} className="space-y-6">
 
           <div>
             <label className="block text-secondary-text mb-2 font-medium">
@@ -40,6 +136,9 @@ const Signup = () => {
             <input
               type="text"
               placeholder="John Doe"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              required
               className="w-full px-4 py-3 bg-brand-dark/50 border border-brand-light/20 rounded-xl text-primary-text placeholder-gray-500 focus:outline-none focus:border-secondary-text transition"
             />
           </div>
@@ -52,6 +151,9 @@ const Signup = () => {
             <input
               type="email"
               placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
               className="w-full px-4 py-3 bg-brand-dark/50 border border-brand-light/20 rounded-xl text-primary-text placeholder-gray-500 focus:outline-none focus:border-secondary-text transition"
             />
           </div>
@@ -66,6 +168,9 @@ const Signup = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
                 className="w-full px-4 py-3 pr-12 bg-brand-dark/50 border border-brand-light/20 rounded-xl text-primary-text placeholder-gray-500 focus:outline-none focus:border-secondary-text transition"
               />
 
@@ -81,8 +186,8 @@ const Signup = () => {
           </div>
 
           {/* Sign Up Button */}
-          <button className="w-full bg-btn-primary py-3 rounded-xl text-primary-text font-semibold hover:opacity-80 transition">
-            Sign Up
+          <button type="submit" disabled={loading} className="w-full bg-btn-primary py-3 rounded-xl text-primary-text font-semibold hover:opacity-80 transition">
+            {loading ? "Creating Account..." : "Sign Up"}
           </button>
 
           <p className="text-center text-gray-400">
@@ -103,7 +208,7 @@ const Signup = () => {
         </div>
 
         <div className="grid grid-cols-1">
-          <button className="flex items-center justify-center gap-2 px-4 py-2 border border-brand-light/20 rounded-xl text-primary-text hover:bg-brand-muted/30 transition">
+          <button onClick={handleGoogleSignup} className="flex items-center justify-center gap-2 px-4 py-2 border border-brand-light/20 rounded-xl text-primary-text hover:bg-brand-muted/30 transition">
             <FaGoogle />
             Google
           </button>

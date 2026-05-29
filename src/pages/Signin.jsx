@@ -71,7 +71,7 @@ const Signin = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-secondary-text mb-2 font-medium">
               Email Address

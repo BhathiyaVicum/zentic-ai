@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Pricing = () => {
 
     return (
@@ -17,7 +19,7 @@ const Pricing = () => {
 
                 {/* Pricing Grid*/}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-1 md:mt-20">
-                    
+
                     {/* Card 1*/}
                     <div className="flex flex-col bg-gradient-to-b from-brand-muted/50 to-brand-dark/30 border border-brand-light/10 rounded-2xl px-6 py-6 md:min-h-[430px] hover:border-brand-light/30 transition-all duration-300 hover:-translate-y-1">
                         <h3 className="text-2xl font-medium text-primary-text mb-3">
@@ -29,9 +31,11 @@ const Pricing = () => {
                             <li className="text-gray-300">✓ 50 Queries/mo</li>
                             <li className="text-gray-300">✓ Basic Search</li>
                         </ul>
-                        <button className="w-full bg-secondary-text px-3 py-2 rounded text-brand-muted font-semibold hover:opacity-80 transition">
-                            Get Started
-                        </button>
+                        <Link to={"/signup"}>
+                            <button className="w-full bg-secondary-text px-3 py-2 rounded text-brand-muted font-semibold hover:opacity-80 transition">
+                                Get Started
+                            </button>
+                        </Link>
                     </div>
 
                     {/* Card 2 */}
