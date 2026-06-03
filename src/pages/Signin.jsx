@@ -1,22 +1,39 @@
-import { FaGoogle, FaGithub, FaEyeSlash, FaEye, FaArrowLeft } from "react-icons/fa";
-import { useState } from "react";
+import { FaGoogle, FaEyeSlash, FaEye, FaArrowLeft } from "react-icons/fa";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
+import { useAuth } from "../hooks/useAuth";
 
 const Signin = () => {
+  
+  const { user, loading: authLoading } = useAuth();
+  const navigate = useNavigate();
   
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+
+  // If already logged in, redirect to dashboard
+  useEffect(() => {
+    if (!authLoading && user) {
+      navigate("/dashboard");
+    }
+  }, [user, authLoading, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
+    // Sign out any existing user
+    const { data: { user: currentUser } } = await supabase.auth.getUser();
+    if (currentUser) {
+      await supabase.auth.signOut();
+    }
+
+    // Then sign in with new credentials
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
@@ -26,12 +43,18 @@ const Signin = () => {
       setError(error.message);
       setLoading(false);
     } else {
-      console.log("Signed in:", data);
+      console.log("Signed in as:", data.user.email);
       navigate("/dashboard");
     }
   };
 
   const handleGoogleLogin = async () => {
+    // Sign out first if someone is logged in
+    const { data: { user: currentUser } } = await supabase.auth.getUser();
+    if (currentUser) {
+      await supabase.auth.signOut();
+    }
+
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
@@ -44,16 +67,21 @@ const Signin = () => {
     }
   };
 
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-black flex items-center justify-center px-6">
       <div className="max-w-md w-full bg-gradient-to-b from-brand-muted/30 to-brand-dark/20 border border-brand-light/10 rounded-2xl p-8 md:p-10">
 
         <div className="text-center mb-8 relative">
           <Link to="/">
-            <button
-              className="absolute top-2 left-2 text-gray-400 hover:text-white transition md:p-2 hover:bg-white/10 rounded-lg"
-              aria-label="Go back"
-            >
+            <button className="absolute top-2 left-2 text-gray-400 hover:text-white transition md:p-2 hover:bg-white/10 rounded-lg">
               <FaArrowLeft size={18} />
             </button>
           </Link>
@@ -118,7 +146,7 @@ const Signin = () => {
           <button 
             type="submit"
             disabled={loading}
-            className="w-full bg-btn-primary py-3 rounded-xl text-primary-text font-semibold hover:opacity-80 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-btn-primary py-3 rounded-xl text-primary-text font-semibold hover:opacity-80 transition disabled:opacity-50"
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>

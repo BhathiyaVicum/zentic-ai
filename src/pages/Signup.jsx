@@ -1,26 +1,56 @@
 import { FaGoogle, FaEyeSlash, FaEye, FaArrowLeft } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
+import { useAuth } from "../hooks/useAuth";
 
 const Signup = () => {
+
+  const { user, loading: authLoading } = useAuth();
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const navigate = useNavigate();
+
+  // If already logged in, redirect to dashboard
+  useEffect(() => {
+    if (!authLoading && user) {
+      navigate("/dashboard");
+    }
+  }, [user, authLoading, navigate]);
 
   const handleSignup = async (e) => {
     e.preventDefault();
     setError(null);
+    
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    // Check password length
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    }
+
     setLoading(true);
 
     try {
+      // Sign out any existing user first to prevent session conflict
+      const { data: { user: currentUser } } = await supabase.auth.getUser();
+      if (currentUser) {
+        await supabase.auth.signOut();
+      }
+
       // Sign up with Supabase
       const { data, error } = await supabase.auth.signUp({
         email: email,
@@ -46,6 +76,19 @@ const Signup = () => {
         return;
       }
 
+      // Create profile in database
+      if (data.user) {
+        const { error: profileError } = await supabase.from("profiles").insert({
+          id: data.user.id,
+          email: email,
+          full_name: fullName,
+        });
+
+        if (profileError) {
+          console.error("Profile creation error:", profileError);
+        }
+      }
+
       // Success
       setSuccess(true);
       setLoading(false);
@@ -62,6 +105,13 @@ const Signup = () => {
 
   const handleGoogleSignup = async () => {
     setError(null);
+    
+    // Sign out any existing user first
+    const { data: { user: currentUser } } = await supabase.auth.getUser();
+    if (currentUser) {
+      await supabase.auth.signOut();
+    }
+
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
@@ -73,6 +123,15 @@ const Signup = () => {
       setError(error.message);
     }
   };
+
+  // Show loading while checking auth
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
 
   if (success) {
     return (
@@ -183,10 +242,45 @@ const Signup = () => {
               </button>
 
             </div>
+            <p className="text-xs text-gray-500 mt-1">
+              Password must be at least 6 characters
+            </p>
+          </div>
+
+          {/* Confirm Password Field */}
+          <div>
+            <label className="block text-secondary-text mb-2 font-medium">
+              Confirm Password
+            </label>
+
+            <div className="relative">
+
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="••••••••"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                className="w-full px-4 py-3 pr-12 bg-brand-dark/50 border border-brand-light/20 rounded-xl text-primary-text placeholder-gray-500 focus:outline-none focus:border-secondary-text transition"
+              />
+
+              <button
+                type="button"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition"
+                onClick={() => setShowConfirmPassword(prev => !prev)}
+              >
+                {showConfirmPassword ? <FaEye /> : <FaEyeSlash />}
+              </button>
+
+            </div>
           </div>
 
           {/* Sign Up Button */}
-          <button type="submit" disabled={loading} className="w-full bg-btn-primary py-3 rounded-xl text-primary-text font-semibold hover:opacity-80 transition">
+          <button 
+            type="submit" 
+            disabled={loading} 
+            className="w-full bg-btn-primary py-3 rounded-xl text-primary-text font-semibold hover:opacity-80 transition disabled:opacity-50"
+          >
             {loading ? "Creating Account..." : "Sign Up"}
           </button>
 
@@ -208,7 +302,10 @@ const Signup = () => {
         </div>
 
         <div className="grid grid-cols-1">
-          <button onClick={handleGoogleSignup} className="flex items-center justify-center gap-2 px-4 py-2 border border-brand-light/20 rounded-xl text-primary-text hover:bg-brand-muted/30 transition">
+          <button 
+            onClick={handleGoogleSignup} 
+            className="flex items-center justify-center gap-2 px-4 py-2 border border-brand-light/20 rounded-xl text-primary-text hover:bg-brand-muted/30 transition"
+          >
             <FaGoogle />
             Google
           </button>
