@@ -51,14 +51,14 @@ const Navbar = () => {
                     </a>
                 </div>
 
-                {/* Desktop Navigation - Centered absolutely */}
+                {/* Desktop Navigation */}
                 <div className="hidden md:flex items-center gap-8 absolute left-1/2 transform -translate-x-1/2">
                     <a
                         href="#home"
                         onClick={(e) => smoothScroll(e, "home")}
                         className={`transition duration-300 text-lg cursor-pointer ${activeSection === "home"
-                                ? "text-primary-text"
-                                : "text-secondary-text hover:text-primary-text"
+                            ? "text-primary-text"
+                            : "text-secondary-text hover:text-primary-text"
                             }`}
                     >
                         Home
@@ -67,8 +67,8 @@ const Navbar = () => {
                         href="#features"
                         onClick={(e) => smoothScroll(e, "features")}
                         className={`transition duration-300 text-lg cursor-pointer ${activeSection === "features"
-                                ? "text-primary-text"
-                                : "text-secondary-text hover:text-primary-text"
+                            ? "text-primary-text"
+                            : "text-secondary-text hover:text-primary-text"
                             }`}
                     >
                         Features
@@ -77,8 +77,8 @@ const Navbar = () => {
                         href="#pricing"
                         onClick={(e) => smoothScroll(e, "pricing")}
                         className={`transition duration-300 text-lg cursor-pointer ${activeSection === "pricing"
-                                ? "text-primary-text"
-                                : "text-secondary-text hover:text-primary-text"
+                            ? "text-primary-text"
+                            : "text-secondary-text hover:text-primary-text"
                             }`}
                     >
                         Pricing
@@ -87,8 +87,8 @@ const Navbar = () => {
                         href="#faq"
                         onClick={(e) => smoothScroll(e, "faq")}
                         className={`transition duration-300 text-lg cursor-pointer ${activeSection === "faq"
-                                ? "text-primary-text"
-                                : "text-secondary-text hover:text-primary-text"
+                            ? "text-primary-text"
+                            : "text-secondary-text hover:text-primary-text"
                             }`}
                     >
                         FAQ
@@ -103,7 +103,7 @@ const Navbar = () => {
                         </button>
                     </Link>
                     <Link to="/signup" >
-                        <button className="px-5 py-2 text-lg font-normal bg-btn-primary rounded-xl text-white hover:opacity-80 transition">
+                        <button className="px-5 py-2 text-lg font-normal bg-btn-primary rounded-xl text-white hover:opacity-80 transition hidden sm:block">
                             Sign up
                         </button>
                     </Link>
@@ -128,7 +128,7 @@ const Navbar = () => {
             {/* Mobile Menu Dropdown */}
             <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                 }`}>
-                <div className="px-6 pb-6 pt-2 bg-black/95 backdrop-blur-lg border-t border-brand-light/20">
+                <div className="px-6 pb-6 pt-2 backdrop-blur-lg bg-black/50border-t border-brand-light/20 ">
                     <div className="flex flex-col gap-4">
                         <a
                             href="#home"
@@ -170,6 +170,22 @@ const Navbar = () => {
                         >
                             FAQ
                         </a>
+                        <div className="border-t border-brand-light/20 pt-5 flex gap-2">
+                            <a>
+                                <Link to="/signin" >
+                                    <button className="w-full text-left px-5 py-2 border-2 border-brand-light/20 text-lg font-normal rounded-xl text-primary-text">
+                                        Login
+                                    </button>
+                                </Link>
+                            </a>
+                            <a>
+                                <Link to="/signup" >
+                                    <button className="w-full text-left px-4 py-2 text-lg font-normal rounded-xl bg-btn-primary  text-primary-text width-full">
+                                        Sign Up
+                                    </button>
+                                </Link>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
