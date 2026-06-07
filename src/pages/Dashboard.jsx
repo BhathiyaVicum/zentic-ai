@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../hooks/useAuth";
 import { FaTrash, FaFilePdf, FaSpinner, FaUpload } from "react-icons/fa";
+import DashboardNavbar from "../components/home/DashboardNavbar";
 
 const Dashboard = () => {
   const { user, loading: authLoading, signOut } = useAuth();
   const navigate = useNavigate();
-  
+
   const [documents, setDocuments] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -15,14 +16,14 @@ const Dashboard = () => {
 
   const fetchDocuments = async () => {
     if (!user) return;
-    
+
     setLoading(true);
     const { data, error } = await supabase
       .from("documents")
       .select("*")
       .eq("user_id", user.id)
       .order("created_at", { ascending: false });
-    
+
     if (error) {
       console.error("Error fetching documents:", error);
       setError("Failed to load documents");
@@ -124,7 +125,7 @@ const Dashboard = () => {
     navigate("/signin");
   };
 
-  if (authLoading || loading) {
+  if (authLoading) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <FaSpinner className="text-secondary-text text-4xl animate-spin" />
@@ -137,38 +138,37 @@ const Dashboard = () => {
     return null;
   }
 
+  const truncateFilename = (filename, maxLength = 20) => {
+
+    if (filename.length <= maxLength) return filename;
+
+    const name = filename.split('.');
+    const ext = name.pop();
+    const baseName = name.join('.');
+
+    // Cut the name and add "..."
+    const truncatedBase = baseName.substring(0, maxLength - 3);
+
+    return `${truncatedBase}...`;
+  };
+
   return (
     <div className="min-h-screen bg-black">
-      {/* Navbar */}
-      <nav className="bg-brand-dark/50 backdrop-blur-lg border-b border-brand-light/20 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-primary-text">
-            Zentic<span className="text-secondary-text">AI</span>
-          </h1>
-          <div className="flex items-center gap-4">
-            <span className="text-gray-400">{user.email}</span>
-            <button
-              onClick={handleSignOut}
-              className="text-gray-400 hover:text-white transition"
-            >
-              Sign Out
-            </button>
-          </div>
-        </div>
-      </nav>
+
+      <DashboardNavbar />
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto py-8">
-        
+      <div className="max-w-7xl mx-auto md:px-0 px-6 py-8">
+
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-white">My Documents</h1>
-            <p className="text-gray-400 mt-1">
+            <h1 className="text-2xl md:text-3xl font-bold text-white">My Documents</h1>
+            <p className="text-gray-400 mt-1 hidden sm:block">
               Upload PDFs to start chatting with your documents
             </p>
           </div>
-          
+
           {/* Upload Button */}
           <label className="flex items-center gap-2 bg-btn-primary px-5 py-2.5 rounded-xl text-white cursor-pointer hover:opacity-80 transition">
             <FaUpload />
@@ -209,14 +209,20 @@ const Dashboard = () => {
                 <div className="flex items-center gap-4">
                   <FaFilePdf className="text-red-400 text-2xl" />
                   <div>
-                    <p className="text-white font-medium">{doc.filename}</p>
+                    <span className="block md:hidden">
+                      {truncateFilename(doc.filename)}
+                    </span>
+
+                    <span className="hidden md:block">
+                      {doc.filename}
+                    </span>
                     <div className="flex items-center gap-4 text-sm text-gray-400">
                       <span>{(doc.file_size / 1024).toFixed(2)} KB</span>
                       <span>{new Date(doc.created_at).toLocaleDateString()}</span>
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => navigate(`/chat/${doc.id}`)}
@@ -226,7 +232,7 @@ const Dashboard = () => {
                   </button>
                   <button
                     onClick={() => handleDelete(doc)}
-                    className="p-2 text-gray-400 hover:text-red-400 transition"
+                    className=" md:p-2 p-0 text-gray-400 hover:text-red-400 transition"
                   >
                     <FaTrash />
                   </button>
