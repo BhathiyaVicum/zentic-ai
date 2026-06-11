@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaUser, FaTimes, FaChevronDown } from "react-icons/fa";
+import { FaUser, FaTimes, FaChevronDown, FaSignOutAlt, FaCog } from "react-icons/fa";
 import { useAuth } from "../../hooks/useAuth";
 
 const DashboardNavbar = () => {
@@ -30,7 +30,7 @@ const DashboardNavbar = () => {
                     <div className="relative">
                         <button
                             onClick={toggleDropdown}
-                            className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white border border-brand-light/20 ring-white/5 hover:bg-white/20 transition"
+                            className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white/10 px-3 py-2 text-md font-body text-white border border-brand-light/20 ring-white/5 hover:bg-white/20 transition"
                         >
                             <FaUser className="size-4 me-1" />
                             Profile
@@ -51,14 +51,17 @@ const DashboardNavbar = () => {
                                         </div>
                                         <a
                                             href="#"
-                                            className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition"
+                                            className="block mt-1 px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition"
                                         >
+                                            <FaCog className="inline-block mr-2" />
                                             Account settings
                                         </a>
                                         <button
                                             onClick={handleSignOut}
                                             className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition"
                                         >
+                                            <FaSignOutAlt className="inline-block mr-2" />
+
                                             Sign Out
                                         </button>
                                     </div>
