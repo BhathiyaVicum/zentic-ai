@@ -61,6 +61,7 @@ const Dashboard = () => {
 
     const filePath = `${user.id}/${Date.now()}_${file.name}`;
 
+    // Upload to Supabase Storage
     const { error: uploadError } = await supabase.storage
       .from("documents")
       .upload(filePath, file);
@@ -73,21 +74,39 @@ const Dashboard = () => {
     }
 
     // Save to database
-    const { error: dbError } = await supabase.from("documents").insert({
+    const { data: insertedData, error: dbError } = await supabase.from("documents").insert({
       user_id: user.id,
       filename: file.name,
       file_size: file.size,
       file_path: filePath,
       status: "pending"
-    });
+    })
+      .select();
 
     if (dbError) {
       console.error("DB error:", dbError);
       setError(dbError.message);
-    } else {
-      fetchDocuments(); // Refresh list
+      setUploading(false);
+      return;
     }
 
+    // Trigger Edge Function to process PDF
+    const documentId = insertedData[0]?.id;
+    if (documentId) {
+      const { error: functionError } = await supabase.functions.invoke('process-pdf', {
+        body: {
+          filePath: filePath,
+          userId: user.id,
+          documentId: documentId
+        }
+      });
+
+      if (functionError) {
+        console.error("Edge Function error:", functionError);
+      }
+    }
+
+    fetchDocuments();
     setUploading(false);
   };
 
