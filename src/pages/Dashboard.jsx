@@ -61,7 +61,6 @@ const Dashboard = () => {
 
     const filePath = `${user.id}/${Date.now()}_${file.name}`;
 
-    // Upload to Supabase Storage
     const { error: uploadError } = await supabase.storage
       .from("documents")
       .upload(filePath, file);
