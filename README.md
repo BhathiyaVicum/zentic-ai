@@ -16,6 +16,20 @@
 
 Upload PDFs, ask questions, and get intelligent answers based **only** on your documents. Your conversations are saved, so you can pick up right where you left off.
 
+## Screenshots
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/c227c42a-1229-4e43-984b-555c952f0eb5" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/161bf3e5-a701-431f-bd15-db14477f1be8" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/35e1c2fa-d2b2-4f31-818f-a543bb6b435f" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/daafdeb3-0650-4f56-ba27-27f3405fdd84" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/52b55139-e42d-4033-b44e-6e50c33271a9" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/55dcae06-fbfa-4f14-a7c8-d870ceb0e0e8" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/9e8ebe78-2cfc-48b4-84b8-76d1f1a838f7" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/18d88286-93d5-440d-aab0-87842bc69181" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/677f1ee3-9a59-4df9-863e-44afecbef6a7" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/c48b53e2-f859-4c4d-92e0-bca8c5b3378c" />
+
+
+
 ### ✨ Core Features
 
 | Feature | Description |
