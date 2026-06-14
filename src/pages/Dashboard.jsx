@@ -123,7 +123,6 @@ const Dashboard = () => {
       console.error("Storage delete error:", storageError);
     }
 
-    // Delete from database
     const { error: dbError } = await supabase
       .from("documents")
       .delete()
