@@ -7,11 +7,11 @@ const FAQ = () => {
     const faqs = [
         {
             question: "How is this different from ChatGPT?",
-            answer: "ChatGPT doesn't know YOUR documents. BrainDocAI only answers from your uploaded files with page citations. You get verified answers from your own knowledge base."
+            answer: "ChatGPT doesn't know YOUR documents. ZenticAI only answers from your uploaded files with page citations. You get verified answers from your own knowledge base."
         },
         {
             question: "What file formats do you support?",
-            answer: "Currently we support PDF, TXT, and Markdown files. DOCX and EPUB support coming soon. Maximum file size is 50MB per document."
+            answer: "Currently we support PDF. DOCX, TXT, Markdown files and EPUB support coming soon. Maximum file size is 50MB per document."
         },
         {
             question: "Is my data private and secure?",

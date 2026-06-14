@@ -114,7 +114,6 @@ const Chat = () => {
     setLoading(true);
 
     try {
-      // Call your Express server instead of Supabase Edge Function
       const response = await fetch('http://localhost:3001/api/chat', {
         method: 'POST',
         headers: {
