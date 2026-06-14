@@ -131,7 +131,7 @@ const Footer = () => {
                             </p>
                         </div>
                         <div className="flex gap-3 text-secondary-text justify-center md:justify-end">
-                            <a href="" className=" hover:text-primary-text transition-all duration-600"><FaGithub /></a>
+                            <a href="https://github.com/BhathiyaVicum/zentic-ai" className=" hover:text-primary-text transition-all duration-600"><FaGithub /></a>
                             <a href="" className="hover:text-primary-text transition-all duration-600"><FaLinkedin /></a>
                             <a href="" className="hover:text-primary-text transition-all duration-600"><FaInstagram /></a>
                         </div>

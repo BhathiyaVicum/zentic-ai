@@ -41,7 +41,7 @@ const Navbar = () => {
 
     return (
         <nav className="fixed w-full z-50 backdrop-blur-lg bg-black/50">
-            <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-6">
+            <div className="max-w-7xl mx-auto flex items-center justify-between py-4 md:px-0 px-6">
 
                 <div className="flex-shrink-0">
                     <a href="#home" onClick={(e) => smoothScroll(e, "home")} className="flex items-center gap-1">

@@ -197,7 +197,7 @@ const Chat = () => {
               >
                 <div
                   className={`max-w-[80%] rounded-2xl px-4 py-3 ${msg.role === "user"
-                    ? "bg-gradient-to-r from-brand-light to-brand-medium text-white"
+                    ? "bg-gradient-to-r from-brand-medium to-brand-medium text-white"
                     : "bg-brand-muted/50 text-gray-200"
                     }`}
                 >
