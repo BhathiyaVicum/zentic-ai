@@ -25,7 +25,6 @@ const Chat = () => {
     }
   }, [user, authLoading, navigate]);
 
-
   // Load document info
   useEffect(() => {
     const fetchDocument = async () => {
@@ -115,15 +114,28 @@ const Chat = () => {
     setLoading(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke("chat", {
-        body: {
+      // Call your Express server instead of Supabase Edge Function
+      const response = await fetch('http://localhost:3001/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           documentId: documentId,
           question: userMessage,
-          conversationId: activeConversationId
-        },
+          conversationId: activeConversationId,
+          userId: user.id
+        }),
       });
 
-      if (error) throw error;
+      const data = await response.json();
+
+      if (data.error) throw new Error(data.error);
+
+      // Update conversationId if it was created/updated
+      if (data.conversationId) {
+        setConversationId(data.conversationId);
+      }
 
       setMessages(prev => [...prev, {
         role: "assistant",
