@@ -44,13 +44,11 @@ const Dashboard = () => {
     const file = event.target.files[0];
     if (!file) return;
 
-    // Validate file type
     if (file.type !== "application/pdf") {
       setError("Please upload a PDF file");
       return;
     }
 
-    // Validate file size (max 50MB)
     if (file.size > 50 * 1024 * 1024) {
       setError("File too large. Max 50MB");
       return;
@@ -74,13 +72,15 @@ const Dashboard = () => {
     }
 
     // Save to database
-    const { data: insertedData, error: dbError } = await supabase.from("documents").insert({
-      user_id: user.id,
-      filename: file.name,
-      file_size: file.size,
-      file_path: filePath,
-      status: "pending"
-    })
+    const { data: insertedData, error: dbError } = await supabase
+      .from("documents")
+      .insert({
+        user_id: user.id,
+        filename: file.name,
+        file_size: file.size,
+        file_path: filePath,
+        status: "pending"
+      })
       .select();
 
     if (dbError) {
@@ -90,19 +90,17 @@ const Dashboard = () => {
       return;
     }
 
-    // Trigger Edge Function to process PDF
+    // Call the PDF processor server
     const documentId = insertedData[0]?.id;
     if (documentId) {
-      const { error: functionError } = await supabase.functions.invoke('process-pdf', {
-        body: {
-          filePath: filePath,
-          userId: user.id,
-          documentId: documentId
-        }
-      });
-
-      if (functionError) {
-        console.error("Edge Function error:", functionError);
+      try {
+        const response = await fetch(`http://localhost:3001/api/process/${documentId}`, {
+          method: "POST"
+        });
+        const result = await response.json();
+        console.log("Processing result:", result);
+      } catch (err) {
+        console.error("Failed to call processor:", err);
       }
     }
 
@@ -114,7 +112,6 @@ const Dashboard = () => {
   const handleDelete = async (doc) => {
     if (!confirm(`Delete "${doc.filename}"?`)) return;
 
-    // Delete from storage
     const { error: storageError } = await supabase.storage
       .from("documents")
       .remove([doc.file_path]);
@@ -132,7 +129,7 @@ const Dashboard = () => {
       console.error("DB delete error:", dbError);
       setError(dbError.message);
     } else {
-      fetchDocuments(); // Refresh list
+      fetchDocuments();
     }
   };
 
