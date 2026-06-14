@@ -87,6 +87,9 @@ npm run dev
 
 # In a separate terminal, start the PDF processor server
 npm run server
+
+# Or start both with
+npm run dev:all
 ```
 
 ## 📄 Document Processing Flow
