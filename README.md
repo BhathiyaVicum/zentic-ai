@@ -19,6 +19,11 @@ Upload PDFs, ask questions, and get intelligent answers based **only** on your d
 ## Screenshots
 <img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/c227c42a-1229-4e43-984b-555c952f0eb5" />
 <img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/161bf3e5-a701-431f-bd15-db14477f1be8" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/a8259406-274d-4089-a0bb-6708fc558210" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/e1b4cdae-b830-4caf-b4ff-c8480e86f1d9" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/aea83a1e-2f32-4ceb-acdd-a3ae5e3992b6" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/4b84ba96-8636-4c0f-896c-9b2d5224ce87" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/42426562-3d19-4eba-b76a-5b4525e645da" />
 <img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/35e1c2fa-d2b2-4f31-818f-a543bb6b435f" />
 <img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/daafdeb3-0650-4f56-ba27-27f3405fdd84" />
 <img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/52b55139-e42d-4033-b44e-6e50c33271a9" />
