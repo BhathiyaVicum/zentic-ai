@@ -299,44 +299,73 @@ app.post('/api/chat', async (req, res) => {
       console.log('No chunks found for this document')
     }
     
-    const GROQ_API_KEY = process.env.GROQ_API_KEY
-    const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions'
     
-    let answer = "I could not find that information in the document."
+    const GROQ_API_KEY = process.env.GROQ_API_KEY;
+    const GROQ_API_URL =
+      "https://api.groq.com/openai/v1/chat/completions";
+
+    let answer = "I could not find that information in the document.";
 
     if (GROQ_API_KEY && context) {
-      console.log('Calling Groq API...')
-      const response = await fetch(GROQ_API_URL, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${GROQ_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'llama-3.3-70b-versatile',
-          messages: [
-            { role: 'system', content: `Answer based ONLY on this context. If not in context, say "I could not find that information."\n\nContext:\n${context.substring(0, 4000)}` },
-            { role: 'user', content: question }
-          ],
-          temperature: 0.7,
-          max_tokens: 500,
-        }),
-      })
+      console.log("Calling Groq API...");
 
-      const groqData = await response.json()
-      if (groqData.choices && groqData.choices[0]) {
-        answer = groqData.choices[0].message.content
-        console.log('Groq response received')
-      } else {
-        console.error('Groq error:', groqData)
+      try {
+        const response = await fetch(GROQ_API_URL, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${GROQ_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: "openai/gpt-oss-120b",
+            messages: [
+              {
+                role: "system",
+                content: `Answer based ONLY on this context. If the answer is not present, say "I could not find that information."
+
+                Context:
+                ${context.substring(0, 4000)}`,
+              },
+              { role: "user", content: question },
+            ],
+            temperature: 0.7,
+            max_tokens: 500,
+          }),
+          signal: AbortSignal.timeout(30000),
+        });
+
+        console.log("Groq HTTP status:", response.status);
+
+        const groqData = await response.json();
+
+        if (!response.ok) {
+          console.error("Groq API error:", groqData);
+          throw new Error(
+            `Groq returned HTTP ${response.status}: ${
+              groqData.error?.message || JSON.stringify(groqData)
+            }`
+          );
+        }
+
+        if (groqData.choices?.[0]) {
+          answer = groqData.choices[0].message.content;
+          console.log("Groq response received");
+        } else {
+          console.error("Unexpected Groq response:", groqData);
+          throw new Error("Groq returned no answer");
+        }
+      } catch (error) {
+        console.error("Groq request failed:", error.message);
+        console.error("Underlying cause:", error.cause);
+        throw error;
       }
     } else if (!context) {
-      console.log('No context found - no relevant chunks retrieved')
-      answer = "No text found in this document. Please make sure the PDF was processed correctly."
-    } else if (!GROQ_API_KEY) {
-      console.log('Groq API key missing')
-      answer = "Groq API key is missing. Please add it to environment variables."
+      answer =
+        "No text found in this document. Please make sure the PDF was processed correctly.";
+    } else {
+      answer = "Groq API key is missing. Please check your environment variables.";
     }
+
 
     // Save assistant message
     await supabase
